@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'PageController@index')->name('index');
+Route::get('/profile', 'PageController@profile')->name('profile');
 
 // Category Routes
 Route::get('/category', 'CategoryController@index')->name('category.index');
@@ -21,7 +22,11 @@ Route::get('/category/create', 'CategoryController@getCreate')->name('category.c
 Route::post('/category/create', 'CategoryController@postCreate')->name('category.create');
 
 // Blog Routes
+Route::get('/blog', 'BlogController@index')->name('blog.index');
+Route::get('/blog/view/{id}', 'BlogController@view')->name('blog.view');
+Route::get('/blog/edit/{id}', 'BlogController@getEdit')->name('blog.edit');
+Route::post('/blog/edit', 'BlogController@postEdit')->name('blog.edit');
 Route::get('/blog/create', 'BlogController@getCreate')->name('blog.create');
 Route::post('/blog/create', 'BlogController@postCreate')->name('blog.create');
+Route::post('/blog/delete/{id}', 'BlogController@postDelete')->name('blog.delete');
 
-Route::get('/home', 'HomeController@index')->name('home');

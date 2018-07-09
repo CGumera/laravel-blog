@@ -10,7 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class BlogController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => ['index', 'view']]);
+    }
+
+    public function index() {
+        $blogs = Blog::all();
+        return view('blog.index')->with('blogs', $blogs);
+    }
+
+    public function view($id) {
+        return view('blog.view');
     }
 
     public function getCreate() {
@@ -32,6 +41,40 @@ class BlogController extends Controller
         $blog->content = $request->input('content');
         $blog->save();
 
-        return view('index');
+        return redirect()->route('index');
+    }
+
+    public function postDelete(Request $request, $id) {
+        Blog::find($id)->delete();
+        return redirect()->route('profile');
+    }
+
+    public function getEdit($id) {
+        $blog = Blog::find($id);
+        if (empty($blog) || $blog->user_id != Auth::id()) {
+            return redirect()->route('profile');
+        }
+        $categories = Categories::all();
+        $data = [
+            'blog' => $blog,
+            'categories' => $categories
+        ];
+        return view('blog.edit')->with('data', $data);
+    }
+
+    public function postEdit(Request $request) {
+        $request->validate([
+            'title' => 'required',
+            'category' => 'required',
+            'content' => 'required'
+        ]);
+
+        $blog = Blog::find($request->input('id'));
+        $blog->title = $request->input('title');
+        $blog->category_id = $request->input('category');
+        $blog->content = $request->input('content');
+        $blog->save();
+
+        return redirect()->route('profile');
     }
 }

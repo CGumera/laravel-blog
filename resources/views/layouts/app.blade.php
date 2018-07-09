@@ -35,7 +35,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('index') }}">Blog</a>
+                            <a class="nav-link" href="{{ route('blog.index') }}">Blog</a>
                         </li>
                         @if(Auth::user())
                             <li class="nav-item">
@@ -64,7 +64,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
                                         Profile
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
