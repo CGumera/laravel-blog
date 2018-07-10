@@ -11,7 +11,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('/category/create') }}" method="POST">
+    <form action="{{ route('categories.create') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="name" class="col-form-label text-md-left">Category Name</label>

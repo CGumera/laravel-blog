@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Blog;
-use App\Categories;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,11 +19,17 @@ class BlogController extends Controller
     }
 
     public function view($id) {
-        return view('blog.view');
+        $blog = Blog::find($id);
+        $categories = Category::all();
+        $data = [
+            'blog' => $blog,
+            'categories' => $categories
+        ];
+        return view('blog.view')->with('data', $data);
     }
 
     public function getCreate() {
-        $categories = Categories::all();
+        $categories = Category::all();
         return view('blog.create')->with('categories', $categories);
     }
 
@@ -39,9 +45,10 @@ class BlogController extends Controller
         $blog->title = $request->input('title');
         $blog->category_id = $request->input('category');
         $blog->content = $request->input('content');
+        $blog->image_path = $request->input('image_path');
         $blog->save();
 
-        return redirect()->route('index');
+        return redirect('/blog/view/'.Auth::id());
     }
 
     public function postDelete(Request $request, $id) {
@@ -54,7 +61,7 @@ class BlogController extends Controller
         if (empty($blog) || $blog->user_id != Auth::id()) {
             return redirect()->route('profile');
         }
-        $categories = Categories::all();
+        $categories = Category::all();
         $data = [
             'blog' => $blog,
             'categories' => $categories
@@ -73,8 +80,9 @@ class BlogController extends Controller
         $blog->title = $request->input('title');
         $blog->category_id = $request->input('category');
         $blog->content = $request->input('content');
+        $blog->image_path = $request->input('image_path');
         $blog->save();
 
-        return redirect()->route('profile');
+        return redirect('/blog/view/'.$request->input('id'));
     }
 }

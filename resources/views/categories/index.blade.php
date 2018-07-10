@@ -12,5 +12,5 @@
         @endif
         <hr>
     </ul>
-    <a class="btn btn-primary" href="{{ route('category.create') }}">Create Category</a>
+    <a class="btn btn-primary" href="{{ route('categories.create') }}">Create Category</a>
 @endsection

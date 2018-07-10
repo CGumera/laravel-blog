@@ -17,9 +17,9 @@ Route::get('/', 'PageController@index')->name('index');
 Route::get('/profile', 'PageController@profile')->name('profile');
 
 // Category Routes
-Route::get('/category', 'CategoryController@index')->name('category.index');
-Route::get('/category/create', 'CategoryController@getCreate')->name('category.create');
-Route::post('/category/create', 'CategoryController@postCreate')->name('category.create');
+Route::get('/category', 'CategoryController@index')->name('categories.index');
+Route::get('/category/create', 'CategoryController@getCreate')->name('categories.create');
+Route::post('/category/create', 'CategoryController@postCreate')->name('categories.create');
 
 // Blog Routes
 Route::get('/blog', 'BlogController@index')->name('blog.index');
