@@ -48,7 +48,7 @@ class BlogController extends Controller
         $blog->image_path = $request->input('image_path');
         $blog->save();
 
-        return redirect('/blog/view/'.Auth::id());
+        return redirect('/blog/view/'.$blog->id);
     }
 
     public function postDelete(Request $request, $id) {
