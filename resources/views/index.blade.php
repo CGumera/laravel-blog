@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Home Page</h1>
+    <h1>About</h1>
     <div>
         <p>
             This web application is a simple Blogging site where you can view, create, edit and delete blogs.
