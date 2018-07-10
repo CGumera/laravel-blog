@@ -36,7 +36,7 @@
             <textarea id="content" name="content" class="form-control" required>{{ $data['blog']->content }}</textarea>
         </div>
         <div class="form-group">
-            <label for="image_path">Image Path</label>
+            <label for="image_path">Image URL</label>
             <input type="text" id="image_path" name="image_path" class="form-control" value="{{ $data['blog']->image_path }}" required>
         </div>
         <br>
