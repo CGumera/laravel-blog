@@ -27,11 +27,22 @@
         </div>
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea id="content" name="content" rows="6" class="form-control" required></textarea>
+            <textarea id="content" name="content" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="image_path">Image Path</label>
+            <input type="text" id="image_path" name="image_path" class="form-control" required>
         </div>
         <br>
         <div class="form-group">
             <button type="submit" class="btn btn-success">Save</button>
         </div>
     </form>
+@endsection
+
+@section('scripts')
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'content' );
+    </script>
 @endsection

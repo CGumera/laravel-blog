@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth',['except' => ['index']]);
+    }
+
     public function index() {
         $blogs = Blog::all();
         return view('index')->with('blogs', $blogs);

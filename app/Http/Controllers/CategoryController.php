@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Categories;
+use App\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -12,7 +12,7 @@ class CategoryController extends Controller
     }
 
     public function index() {
-        $categories = Categories::all();
+        $categories = Category::all();
         return view('categories.index')->with('categories', $categories);
     }
 
@@ -25,9 +25,9 @@ class CategoryController extends Controller
             'name' => 'required'
         ]);
 
-        $category = new Categories();
+        $category = new Category();
         $category->category = $request->input('name');
         $category->save();
-        return redirect()->route('category.index');
+        return redirect()->route('categories.index');
     }
 }
