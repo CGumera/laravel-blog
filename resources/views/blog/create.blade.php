@@ -11,7 +11,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ url('/blog/create') }}" method="POST">
+    <form action="{{ url('/blog/create') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="title">Title</label>
@@ -30,8 +30,8 @@
             <textarea id="content" name="content" class="form-control" required></textarea>
         </div>
         <div class="form-group">
-            <label for="image_path">Image URL</label>
-            <input type="text" id="image_path" name="image_path" class="form-control" required>
+            <label for="cover_image">Image: </label>
+            <input type="file" id="cover_image" name="cover_image" required>
         </div>
         <br>
         <div class="form-group">

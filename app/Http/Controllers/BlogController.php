@@ -40,12 +40,23 @@ class BlogController extends Controller
             'content' => 'required'
         ]);
 
+        //Handle file upload
+        if ($request->hasFile('cover_image')) {
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            $filenameToStore = $filename."_".time().".".$extension;
+            $request->file('cover_image')->storeAs('public/cover_images', $filenameToStore);
+        } else {
+            $filenameToStore = 'noimage.jpg';
+        }
+
         $blog = new Blog();
         $blog->user_id = Auth::id();
         $blog->title = $request->input('title');
         $blog->category_id = $request->input('category');
         $blog->content = $request->input('content');
-        $blog->image_path = $request->input('image_path');
+        $blog->image_path = $filenameToStore;
         $blog->save();
 
         return redirect('/blog/view/'.$blog->id);
@@ -76,11 +87,22 @@ class BlogController extends Controller
             'content' => 'required'
         ]);
 
+        //Handle file upload
+        if ($request->hasFile('cover_image')) {
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            $filenameToStore = $filename."_".time().".".$extension;
+            $request->file('cover_image')->storeAs('public/cover_images', $filenameToStore);
+        }
+
         $blog = Blog::find($request->input('id'));
         $blog->title = $request->input('title');
         $blog->category_id = $request->input('category');
         $blog->content = $request->input('content');
-        $blog->image_path = $request->input('image_path');
+        if ($request->hasFile('cover_image')) {
+            $blog->image_path = $filenameToStore;
+        }
         $blog->save();
 
         return redirect('/blog/view/'.$request->input('id'));

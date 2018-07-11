@@ -5,7 +5,7 @@
         <div class="col-sm-9">
             <div>
                 <a href="{{ $data['blog']->image_path }}">
-                    <img src="{{ $data['blog']->image_path }}" style="width: 100%; height: 450px;">
+                    <img src="/storage/cover_images/{{ $data['blog']->image_path }}" style="width: 100%; height: 450px;">
                 </a>
             </div>
 
