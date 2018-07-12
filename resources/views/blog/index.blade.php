@@ -2,9 +2,9 @@
 
 @section('content')
     <h1>Blogs</h1>
-    @if(count($blogs) > 0)
+    @if(count($data['blogs']) > 0)
         <div class="row mb-2">
-        @foreach($blogs as $blog)
+        @foreach($data['blogs'] as $blog)
             <div class="col-md-6">
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
                     <div class="card-body d-flex flex-column align-items-start">

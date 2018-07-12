@@ -24,6 +24,7 @@ Route::post('/category/create', 'CategoryController@postCreate')->name('categori
 // Blog Routes
 Route::get('/blog', 'BlogController@index')->name('blog.index');
 Route::get('/blog/view/{id}', 'BlogController@view')->name('blog.view');
+Route::get('/blog/category/view/{id}', 'BlogController@viewByCategory')->name('blog.category.view');
 Route::get('/blog/edit/{id}', 'BlogController@getEdit')->name('blog.edit');
 Route::post('/blog/edit', 'BlogController@postEdit')->name('blog.edit');
 Route::get('/blog/create', 'BlogController@getCreate')->name('blog.create');

@@ -16,7 +16,12 @@ class BlogController extends Controller
 
     public function index() {
         $blogs = Blog::all();
-        return view('blog.index')->with('blogs', $blogs);
+        $categories = Category::all();
+        $data = [
+            'blogs' => $blogs,
+            'categories' => $categories
+        ];
+        return view('blog.index')->with('data', $data);
     }
 
     public function view($id) {
@@ -27,6 +32,16 @@ class BlogController extends Controller
             'categories' => $categories
         ];
         return view('blog.view')->with('data', $data);
+    }
+
+    public function viewByCategory($categoryId) {
+        $blogs = Blog::where('category_id', $categoryId)->get();
+        $categories = Category::all();
+        $data = [
+            'blogs' => $blogs,
+            'categories' => $categories
+        ];
+        return view('blog.index')->with('data', $data);
     }
 
     public function getCreate() {

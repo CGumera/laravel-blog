@@ -21,11 +21,11 @@
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
             </form>
             <hr>
-            <h3>Categories</h3>
+            <h3 class="text-success">Categories</h3>
             <ul class="list-group">
                 @foreach($data['categories'] as $category)
                     <li class="list-group">
-                        <a class="text-dark">{{ $category->category }}</a>
+                        <a href="/blog/category/view/{{ $category->id }}" class="text-dark">{{ $category->category }}</a>
                     </li>
                 @endforeach
             </ul>
