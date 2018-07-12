@@ -6,6 +6,7 @@ use App\Blog;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -63,7 +64,12 @@ class BlogController extends Controller
     }
 
     public function postDelete(Request $request, $id) {
-        Blog::find($id)->delete();
+        $blog = Blog::find($id);
+        if ($blog->user_id != Auth::id()) {
+            return redirect()->route('profile')->with('error', 'Unauthorized page');
+        }
+        $this->deleteFile($blog->image_path);
+        $blog->delete();
         return redirect()->route('profile');
     }
 
@@ -101,10 +107,17 @@ class BlogController extends Controller
         $blog->category_id = $request->input('category');
         $blog->content = $request->input('content');
         if ($request->hasFile('cover_image')) {
+            $this->deleteFile($blog->image_path);
             $blog->image_path = $filenameToStore;
         }
         $blog->save();
 
         return redirect('/blog/view/'.$request->input('id'));
+    }
+
+    public function deleteFile($filename) {
+        if ($filename != 'noimage.jpg') {
+            Storage::delete('public/cover_images/'.$filename);
+        }
     }
 }

@@ -16,7 +16,7 @@
                         <p class="card-text mb-auto">{{ \Illuminate\Support\Str::limit(strip_tags($blog->content), $limit = '110', $end = '...') }}</p>
                         <a href="/blog/view/{{$blog->id}}">Continue reading</a>
                     </div>
-                    <img class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="/storage/cover_images/{{ $blog->image_path }}">
+                    <img class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" style="width: 200px !important; height: 250px;" src="/storage/cover_images/{{ $blog->image_path }}">
                 </div>
             </div>
         @endforeach
