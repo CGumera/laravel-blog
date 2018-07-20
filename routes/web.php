@@ -31,3 +31,6 @@ Route::get('/blog/create', 'BlogController@getCreate')->name('blog.create');
 Route::post('/blog/create', 'BlogController@postCreate')->name('blog.create');
 Route::post('/blog/delete/{id}', 'BlogController@postDelete')->name('blog.delete');
 
+// Socialite Routes
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
